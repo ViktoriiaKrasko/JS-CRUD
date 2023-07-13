@@ -1,0 +1,55 @@
+{{!
+Це код container файлу для index сторінки,
+в якому міститься код, котрий буде віддаватися по шляху (PATH) - "/"
+}}
+
+<main>
+
+  <section>
+    <div class="form">
+      <h1 class="form__title">
+        Інформація про товар
+      </h1>
+      <form method="POST" action="/product-edit">
+        {{#with data.products}}
+        {{#if isEmpty}}
+        <mark>Пустий</mark>
+        {{else}}
+        <div class="form__content">
+          <div class="form__row">
+            <div class="form__field">
+              <label for="name" class="form__label">Назва товару</label>
+              <input type="text" name="name" class="form__input">{{name}}
+            </div>
+            <div class="form__field">
+              <label for="price" class="form__label">Ціна</label>
+              <input type="number" name="price" class="form__input">{{price}}
+            </div>
+            <div class="form__field">
+              <label for="id" class="form__label">Ціна</label>
+              <input type="number" name="id" class="form__input">{{id}}
+            </div>
+          </div>
+          <div class="form__field">
+            <label for="description" class="form__label">Короткий опис товару</label>
+            <textarea class="form__input" id="description" name="description" rows="3">{{description}}</textarea>
+            <span class="form__message">Відображається у картці товару</span>
+          </div>
+          <div class="form__row">
+            <button class="form__button">Зберегти оновлення</button>
+            <button class="form__button">Видалити товар</button>
+          </div>
+        </div>
+        {{/if}}
+        {{/with}}
+      </form>
+    </div>
+  </section>
+</main>
+
+{{!
+Цей код містить лише те, що буде виводитись в
+
+<body>
+  Адже наш layout/default.hbs має вже структуру HTML
+  }}
