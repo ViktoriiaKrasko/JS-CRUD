@@ -84,9 +84,9 @@ class Product {
   static getById = (id) =>
     this.#list.find((product) => product.id === id)
 
-  static updateById = (id, data) => {
-    const product = this.getById(id)
-  }
+  // static updateById = (id, data) => {
+  //   const product = this.getById(id)
+  // }
 
   static deleteById = (id) => {
     const index = this.#list.findIndex(
@@ -266,47 +266,81 @@ router.get('/product-list', function (req, res) {
 router.get('/product-edit', function (req, res) {
   // res.render генерує нам HTML сторінку
 
-  const { id } = req.query.id
+  const { id } = req.query
 
-  const product = Product.getList().find(
-    (item) => item.id === id,
-  )
+  const product = Product.getById(Number(id))
 
-  console.log(id)
+  // console.log(product)
 
-  // ↙️ cюди вводимо назву файлу з сontainer
-  res.render('product-edit', {
-    // вказуємо назву папки контейнера, в якій знаходяться наші стилі
-    style: 'product-edit',
+  if (product) {
+    // ↙️ cюди вводимо назву файлу з сontainer
+    return res.render('product-edit', {
+      // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+      style: 'product-edit',
 
-    data: {
-      products: {
-        product,
-        isEmpty: product.length === 0,
+      data: {
+        name: product.name,
+        price: product.price,
+        id: product.id,
+        description: product.description,
       },
-    },
-  })
-  // ↑↑ сюди вводимо JSON дані
+    })
+  } else {
+    return res.render('product-alert', {
+      // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+      style: 'product-alert',
+      info: 'Продукту за таким ID не знайдено',
+    })
+  }
 })
+// ↑↑ сюди вводимо JSON дані
 
 // ================================================================
 
 router.post('/product-edit', function (req, res) {
   // res.render генерує нам HTML сторінку
-  const { name, price, description } = req.body
+  const { id, name, price, description } = req.body
 
-  const product = Product.getById(id)
+  const product = Product.updateById(id, {
+    name,
+    price,
+    description,
+  })
 
-  if (product.updateById(product)) {
-    Product.update(product, { id })
-    result = true
+  console.log(id)
+  console.log(product)
+
+  if (product) {
+    // ↙️ cюди вводимо назву файлу з сontainer
+    res.render('product-alert', {
+      // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+      style: 'product-alert',
+      info: 'Інформація про товар оновлена',
+    })
+  } else {
+    // ↙️ cюди вводимо назву файлу з сontainer
+    res.render('product-alert', {
+      // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+      style: 'product-alert',
+      info: 'Сталася помилка',
+    })
   }
+  // ↑↑ сюди вводимо JSON дані
+})
+
+// ================================================================
+
+router.get('/product-delete', function (req, res) {
+  // res.render генерує нам HTML сторінку
+  const { id } = req.query
+
+  Product.deleteById(Number(id))
 
   // ↙️ cюди вводимо назву файлу з сontainer
   res.render('product-alert', {
     // вказуємо назву папки контейнера, в якій знаходяться наші стилі
     style: 'product-alert',
-    info: 'Товар успішно додано',
+    info: 'Товар видалений',
   })
   // ↑↑ сюди вводимо JSON дані
 })
