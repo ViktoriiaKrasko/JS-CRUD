@@ -1,0 +1,52 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  gap: 32px;
+}
+.form__title {
+  color: #0275d8;
+  font-size: 24px;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.product {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-gap: 40px;
+}
+.product__card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 5px 5px 10px #ddd;
+  border-radius: 8px;
+  padding: 16px;
+}
+.product__row {
+  display: flex;
+  justify-content: space-between;
+}
+.product__name {
+  font-size: 20px;
+  font-weight: 500;
+}
+.product__id {
+  color: #919191;
+}
+.product__price {
+  font-size: 18px;
+  font-weight: 500;
+}
+.product__edit {
+  color: #0275d8;
+}
+
+/*# sourceMappingURL=style.css.map */
