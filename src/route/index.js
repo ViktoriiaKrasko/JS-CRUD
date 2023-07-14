@@ -103,9 +103,12 @@ class Product {
 
   static updateById = (id, data) => {
     const product = this.getById(id)
+    const { name } = data
 
     if (product) {
-      this.update(product, data)
+      if (name) {
+        product.name = name
+      }
 
       return true
     } else {
@@ -301,7 +304,7 @@ router.post('/product-edit', function (req, res) {
   // res.render генерує нам HTML сторінку
   const { id, name, price, description } = req.body
 
-  const product = Product.updateById(id, {
+  const product = Product.updateById(Number(id), {
     name,
     price,
     description,
