@@ -1,0 +1,48 @@
+@use '../../lib/service.scss' as s;
+
+@use '../../component/heading/style.scss' as heading;
+@use '../../component/purchase-product/style.scss' as
+  purchaseProduct;
+@use '../../component/purchase-field/style.scss' as field;
+@use '../../component/purchase-divider/style.scss' as
+  divider;
+@use '../../component/purchase-button/style.scss' as button;
+
+.main {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: s.space(10);
+  padding: s.space(10);
+}
+
+.heading {
+  margin-bottom: s.space(15);
+}
+
+.purchase-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: s.space(4);
+  text-decoration: none;
+  font-size: 16px;
+  line-height: 24px;
+
+  &__id,
+  &__category {
+    font-weight: 400;
+    color: s.color(gray);
+  }
+
+  &__item {
+    font-weight: 500;
+    color: black;
+  }
+
+  &__column {
+    display: flex;
+    flex-direction: column;
+    gap: s.space(3);
+  }
+}

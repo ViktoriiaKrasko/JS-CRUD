@@ -1,0 +1,66 @@
+@use '../../lib/service.scss' as s;
+@use '../../component/purchase-button/style.scss' as button;
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: s.space(3);
+  border: 1px solid s.color(border);
+  border-radius: 10px;
+  padding: s.space(4);
+
+  &__image {
+    max-height: 300px;
+    width: 100%;
+  }
+
+  &__title {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  &__subtitle {
+    font-size: 16px;
+    color: s.color(darker);
+  }
+
+  &__category {
+    padding: 5px 10px;
+    border: 1px solid transparent;
+    border-radius: 30px;
+    font-size: 14px;
+    color: s.color(darker);
+  }
+
+  &__category--1 {
+    border-color: green;
+    color: green;
+  }
+
+  &__category--2 {
+    border-color: blue;
+    color: blue;
+  }
+
+  &__button {
+    text-decoration: none;
+    background-color: s.color(primary);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+    &--price {
+      font-size: 20px;
+      font-weight: 500;
+    }
+  }
+}
