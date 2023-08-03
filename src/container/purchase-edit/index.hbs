@@ -1,12 +1,13 @@
 <main class="main">
     {{> heading title="Зміна данних"}}
     {{#with data}}
-    <form action="POST" action="/purchase-edit">
+    <form method="POST" action="/purchase-update?id={{id}}">
         <div>
             ID:
             <br>
-            <div>{{id}}</div>
+            {{id}}
         </div>
+
         {{> purchase-field label="Ім'я:" name="firstname" type="text" value=firstname }}
 
         {{> purchase-field label="Прізвище:" name="lastname" type="text" value=lastname}}
@@ -15,13 +16,8 @@
 
         {{> purchase-field label="Пошта:" name="email" type="email" value=email}}
 
-
-        <a href="/purchase-edit?id={{id}}">
-            {{> purchase-button text="Зберегти зміни"}}
-        </a>
-
+        {{> purchase-button text="Зберегти зміни" type="submit"}}
 
         {{/with}}
     </form>
-
 </main>

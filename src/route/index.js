@@ -596,7 +596,7 @@ router.get('/purchase-edit', function (req, res) {
 
   if (purchase) {
     // ↙️ cюди вводимо назву файлу з сontainer
-    return res.render('purchase-edit', {
+    res.render('purchase-edit', {
       // вказуємо назву папки контейнера, в якій знаходяться наші стилі
       style: 'purchase-edit',
 
@@ -609,10 +609,12 @@ router.get('/purchase-edit', function (req, res) {
       },
     })
   } else {
-    return res.render('alert', {
+    res.render('alert', {
       // вказуємо назву папки контейнера, в якій знаходяться наші стилі
       style: 'alert',
+      message: 'Error',
       info: 'Дані не знайдено',
+      link: '/purchase-info?id=${id}',
     })
   }
 })
@@ -620,32 +622,35 @@ router.get('/purchase-edit', function (req, res) {
 
 // ================================================================
 
-router.post('/purchase-edit', function (req, res) {
+router.post('/purchase-update', function (req, res) {
   // res.render генерує нам HTML сторінку
-  const { id, firstname, lastname, phone, email } = req.body
+  const id = Number(req.query.id)
+  let { firstname, lastname, phone, email } = req.body
+  const purchase = Purchase.getById(id)
 
-  const newPurchase = Purchase.updateById(id, {
-    firstname,
-    lastname,
-    phone,
-    email,
-  })
+  console.log(purchase)
 
-  console.log(id)
-  console.log(newPurchase)
-
-  if (newPurchase) {
-    return res.render('alert', {
-      style: 'alert',
-
-      data: {
-        message: 'Успішно',
-        info: 'Дані змінено',
-        link: '/purchase-list',
-      },
+  if (purchase) {
+    const newPurchase = Purchase.updateById(id, {
+      firstname,
+      lastname,
+      phone,
+      email,
     })
+    console.log(newPurchase)
+    if (newPurchase) {
+      res.render('alert', {
+        style: 'alert',
+
+        data: {
+          message: 'Успішно',
+          info: 'Дані змінено',
+          link: '/purchase-list',
+        },
+      })
+    }
   } else {
-    return res.render('alert', {
+    res.render('alert', {
       style: 'alert',
 
       data: {
