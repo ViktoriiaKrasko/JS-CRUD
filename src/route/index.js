@@ -195,7 +195,7 @@ class Purchase {
 
     Purchase.#bonusAccount.set(email, updateBalance)
 
-    console.log(email, updateBalance)
+    // console.log(email, updateBalance)
 
     return amount
   }
@@ -232,11 +232,16 @@ class Purchase {
   }
 
   static getList = () => {
-    return Purchase.#list.reverse()
+    return Purchase.#list.reverse().map((purchase) => ({
+      id: purchase.id,
+      product: purchase.product.title,
+      totalPrice: purchase.totalPrice,
+      bonus: Purchase.calcBonusAmount(purchase.totalPrice),
+    }))
   }
 
   static getById = (id) => {
-    return Purchase.#list.find((item) => item.id === id)
+    return this.#list.find((purchase) => purchase.id === id)
   }
 
   static updateById = (id, data) => {
@@ -325,7 +330,7 @@ router.post('/purchase-create', function (req, res) {
   const id = Number(req.query.id)
   const amount = Number(req.body.amount)
 
-  console.log(id, amount)
+  // console.log(id, amount)
 
   if (amount < 1) {
     return res.render('alert', {
@@ -351,7 +356,7 @@ router.post('/purchase-create', function (req, res) {
     })
   }
 
-  console.log(product, amount)
+  // console.log(product, amount)
 
   const productPrice = product.price * amount
   const totalPrice = productPrice + Purchase.DELIVERY_PRICE
@@ -452,10 +457,10 @@ router.post('/purchase-submit', function (req, res) {
       },
     })
   }
-  console.log(typeof totalPrice)
-  console.log(typeof productPrice)
-  console.log(typeof deliveryPrice)
-  console.log(typeof amount)
+  // console.log(typeof totalPrice)
+  // console.log(typeof productPrice)
+  // console.log(typeof deliveryPrice)
+  // console.log(typeof amount)
 
   if (!firstname || !lastname || !email || !phone) {
     return res.render('alert', {
@@ -472,7 +477,7 @@ router.post('/purchase-submit', function (req, res) {
   if (bonus || bonus > 0) {
     const bonusAmount = Purchase.getBonusBalance(email)
 
-    console.log(bonusAmount)
+    // console.log(bonusAmount)
 
     if (bonus > bonusAmount) {
       bonus = bonusAmount
@@ -514,7 +519,7 @@ router.post('/purchase-submit', function (req, res) {
     product,
   )
 
-  console.log(purchase)
+  // console.log(purchase)
 
   return res.render('alert', {
     style: 'alert',
@@ -535,7 +540,7 @@ router.get('/purchase-list', function (req, res) {
   const id = Number(req.query.id)
   const purchase = Purchase.getList(Number(id))
 
-  console.log(purchase)
+  // console.log(purchase)
 
   // ↙️ cюди вводимо назву файлу з сontainer
   res.render('purchase-list', {
@@ -554,9 +559,9 @@ router.get('/purchase-list', function (req, res) {
 router.get('/purchase-info', function (req, res) {
   // res.render генерує нам HTML сторінку
   const id = Number(req.query.id)
-  const purchase = Purchase.getList(Number(id))
+  const purchase = Purchase.getById(Number(id))
 
-  console.log(purchase)
+  // console.log(purchase)
 
   // ↙️ cюди вводимо назву файлу з сontainer
   res.render('purchase-info', {
@@ -564,7 +569,16 @@ router.get('/purchase-info', function (req, res) {
     style: 'purchase-info',
 
     data: {
-      list: purchase,
+      id: purchase.id,
+      firstname: purchase.firstname,
+      lastname: purchase.lastname,
+      phone: purchase.phone,
+      email: purchase.email,
+      product: purchase.product.title,
+      productPrice: purchase.product.price,
+      deliveryPrice: purchase.deliveryPrice,
+      totalPrice: purchase.totalPrice,
+      bonus: purchase.product.price * 0.1,
     },
   })
   // ↑↑ сюди вводимо JSON дані
@@ -574,12 +588,11 @@ router.get('/purchase-info', function (req, res) {
 
 router.get('/purchase-edit', function (req, res) {
   // res.render генерує нам HTML сторінку
-
   const id = Number(req.query.id)
-
   const purchase = Purchase.getById(Number(id))
 
-  // console.log(product)
+  // console.log(id)
+  // console.log(purchase)
 
   if (purchase) {
     // ↙️ cюди вводимо назву файлу з сontainer
@@ -588,7 +601,11 @@ router.get('/purchase-edit', function (req, res) {
       style: 'purchase-edit',
 
       data: {
-        list: purchase,
+        id: purchase.id,
+        firstname: purchase.firstname,
+        lastname: purchase.lastname,
+        phone: purchase.phone,
+        email: purchase.email,
       },
     })
   } else {
@@ -605,10 +622,7 @@ router.get('/purchase-edit', function (req, res) {
 
 router.post('/purchase-edit', function (req, res) {
   // res.render генерує нам HTML сторінку
-  const id = Number(req.query.id)
-  const purchase = Purchase.getList(Number(id))
-
-  const { firstname, lastname, phone, email } = req.body
+  const { id, firstname, lastname, phone, email } = req.body
 
   const newPurchase = Purchase.updateById(id, {
     firstname,
@@ -620,8 +634,8 @@ router.post('/purchase-edit', function (req, res) {
   console.log(id)
   console.log(newPurchase)
 
-  if (purchase) {
-    res.render('alert', {
+  if (newPurchase) {
+    return res.render('alert', {
       style: 'alert',
 
       data: {
@@ -631,7 +645,7 @@ router.post('/purchase-edit', function (req, res) {
       },
     })
   } else {
-    res.render('alert', {
+    return res.render('alert', {
       style: 'alert',
 
       data: {

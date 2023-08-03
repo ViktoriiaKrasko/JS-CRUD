@@ -1,24 +1,27 @@
 <main class="main">
-    {{> heading text="Зміна данних"}}
+    {{> heading title="Зміна данних"}}
     {{#with data}}
     <form action="POST" action="/purchase-edit">
         <div>
             ID:
             <br>
-            {{id}}
+            <div>{{id}}</div>
         </div>
-        {{> purchase-field label=" Ім'я" name="firstname" }}
+        {{> purchase-field label="Ім'я:" name="firstname" type="text" value=firstname }}
 
-        {{> purchase-field label="Прізвище" name="lastname"}}
+        {{> purchase-field label="Прізвище:" name="lastname" type="text" value=lastname}}
 
-        {{> purchase-field label="Телефон" name="phone"}}
+        {{> purchase-field label="Телефон:" name="phone" type="number" value=phone}}
 
-        {{> purchase-field label="Пошта" name="email"}}
+        {{> purchase-field label="Пошта:" name="email" type="email" value=email}}
+
+
+        <a href="/purchase-edit?id={{id}}">
+            {{> purchase-button text="Зберегти зміни"}}
+        </a>
 
 
         {{/with}}
     </form>
-    <a href="/purchase-edit?id={{id}}">
-        {{> purchase-button text="Зберегти зміни"}}
-    </a>
+
 </main>

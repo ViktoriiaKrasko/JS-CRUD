@@ -2,10 +2,10 @@
     {{#with data}}
     {{> heading title="Інформація про замовлення"}}
 
-    {{#each list}}
+
     <div class="purchase-info__id">
         <div class="purchase-info__field">ID:</div>
-        <div class="purchase-info__item">{{this.id}}</div>
+        <div class="purchase-info__item">{{id}}</div>
 
     </div>
 
@@ -15,28 +15,28 @@
         <div class="purchase-info__field">
             <div>Ім'я:</div>
             <div class="purchase-info__item">
-                {{this.firstname}}
+                {{firstname}}
             </div>
         </div>
 
         <div class="purchase-info__field">
             <div>Прізвище:</div>
             <div class="purchase-info__item">
-                {{this.lastname}}
+                {{lastname}}
             </div>
         </div>
 
         <div class="purchase-info__field">
             <div>Телефон:</div>
             <div class="purchase-info__item">
-                {{this.phone}}
+                {{phone}}
             </div>
 
         </div>
         <div class="purchase-info__field">
             <div>Електронна пошта:</div>
             <div class="purchase-info__item">
-                {{this.email}}
+                {{email}}
             </div>
         </div>
 
@@ -50,23 +50,25 @@
                 м. Київ, 02000,
                 Україна</div>
         </div>
-        <div class="purchase-info__field">Назва товару: <div class="purchase-info__item">{{this.product.title}}</div>
+        <div class="purchase-info__field">Назва товару: <div class="purchase-info__item">{{product}}</div>
         </div>
     </div>
 
     {{> purchase-divider}}
 
     <div class="purchase-info__price">
-        <div class="purchase-info__field">Вартість товарів: <div class="purchase-info__item">{{productPrice}}₴</div>
+        <div class="purchase-info__field">Вартість товарів: <div class="purchase-info__item">{{this.productPrice}}₴
+            </div>
         </div>
-        <div class="purchase-info__field">Вартість доставки: <div class="purchase-info__item">{{deliveryPrice}}₴</div>
+        <div class="purchase-info__field">Вартість доставки: <div class="purchase-info__item">{{this.deliveryPrice}}₴
+            </div>
         </div>
-        <div class="purchase-info__field">Сума до сплати: <div class="purchase-info__item">{{totalPrice}}₴</div>
+        <div class="purchase-info__field">Сума до сплати: <div class="purchase-info__item">{{this.totalPrice}}₴</div>
         </div>
-        <div class="purchase-info__field">Нараховані бонуси: <div class="purchase-info__item">{{bonus}}₴</div>
+        <div class="purchase-info__field">Нараховані бонуси: <div class="purchase-info__item">{{this.bonus}}₴</div>
         </div>
     </div>
-    {{/each}}
+
 
     {{> purchase-divider}}
 
