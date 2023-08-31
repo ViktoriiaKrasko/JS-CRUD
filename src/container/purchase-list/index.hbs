@@ -1,0 +1,12 @@
+<main class="main">
+    {{> heading title="Мої замовлення"}}
+
+    {{#with data}}
+    {{> purchase-items data=list}}
+    {{/with}}
+
+
+    {{> purchase-divider}}
+
+
+</main>

@@ -1,0 +1,150 @@
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.heading__title {
+  font-size: 24px;
+  color: #0275d8;
+  font-weight: 500;
+}
+.heading__info {
+  font-size: 16px;
+  color: #000;
+}
+
+.purchase__button {
+  text-decoration: none;
+  background-color: #0275d8;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+.purchase__button:hover {
+  opacity: 0.7;
+}
+.purchase__button--price {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  border: 1px solid #ced4da;
+  border-radius: 10px;
+  padding: 16px;
+}
+.product-card__image {
+  max-height: 300px;
+  width: 100%;
+}
+.product-card__title {
+  font-size: 20px;
+  font-weight: bold;
+}
+.product-card__subtitle {
+  font-size: 16px;
+  color: #919191;
+}
+.product-card__category {
+  padding: 5px 10px;
+  border: 1px solid transparent;
+  border-radius: 30px;
+  font-size: 14px;
+  color: #919191;
+}
+.product-card__category--1 {
+  border-color: green;
+  color: green;
+}
+.product-card__category--2 {
+  border-color: blue;
+  color: blue;
+}
+.product-card__button {
+  text-decoration: none;
+  background-color: #0275d8;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+.product-card__button:hover {
+  opacity: 0.7;
+}
+.product-card__button--price {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+.field__label {
+  font-size: 14px;
+}
+.field__input {
+  border: 1px solid #ddd;
+  padding: 8px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+.field--disabled {
+  position: absolute;
+  display: none;
+}
+
+.product-info__divider {
+  width: 100%;
+  height: 1px;
+  background-color: #ced4da;
+}
+
+.main {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 40px;
+}
+
+.purchase-info__customer,
+.purchase-info__price {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  color: #343a40;
+}
+
+.purchase-info__address {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.purchase-info__item {
+  font-weight: 500;
+  color: black;
+}
+
+.purchase-info__field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/*# sourceMappingURL=style.css.map */

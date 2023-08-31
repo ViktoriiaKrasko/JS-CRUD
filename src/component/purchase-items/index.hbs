@@ -1,0 +1,33 @@
+{{#each data}}
+<a href="/purchase-info?id={{id}}" class="purchase-list">
+
+    <div class="purchase-list__id">
+        ID: {{this.id}}
+    </div>
+    <div class="purchase-list__item">
+        <div class="purchase-list__category">
+            Товари
+        </div>
+        <div class="purchase-list__item">
+            {{this.product}}
+        </div>
+    </div>
+    <div class="purchase-list__item">
+        <div class="purchase-list__category">
+            Сума замовлення
+        </div>
+        <div class="purchase-list__item">
+            {{this.totalPrice}}₴
+        </div>
+    </div>
+    <div class="purchase-list__item">
+        <div class="purchase-list__category">
+            Нараховані бонуси
+        </div>
+        <div class="purchase-list__item">
+            {{this.bonus}}₴
+        </div>
+    </div>
+</a>
+
+{{/each}}
